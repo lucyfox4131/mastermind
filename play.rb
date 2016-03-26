@@ -15,13 +15,17 @@ class Play
       print "Would you like to (p)lay, read the (i)nstructions, or (q)uit? \n >"
       player_choice = gets.chomp.downcase
 
-      if player_choice = 'i'
+       if player_choice == 'i'
+         instructions
+      end
 
       break if player_choice == 'q'
     end
     exit
   end
 
-  
+  def self.instructions
+    puts "These are the instructions to the game!"
+  end
 
 end
