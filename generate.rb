@@ -12,7 +12,3 @@ class Generate
     new_sequence = 4.times.map {@color_array.sample}
   end
 end
-
-#
-# does_it_work = Generate.new
-# puts "Hey #{does_it_work.random_sequence}"

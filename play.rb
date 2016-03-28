@@ -37,12 +37,3 @@ class Play
   end
 
 end
-
-#
-# print "I have generated a beginner sequence with four elements of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit to quit the game at any time. Please enter a guess >"
-# @guess = gets.chomp.downcase
-# puts @guess
-# if @guess.length != 4
-#   puts "WOAH there your sequence must be four characters long. Try again please :)"
-# end
-#p guess
