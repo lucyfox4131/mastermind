@@ -16,7 +16,7 @@ class Game
     new_sequence = Generate.new
     @random_sequence = new_sequence.random_sequence
     p "This is the #{@random_sequence}"
-    puts "I have generated a beginner sequence with four elements of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit to quit the game at any time."
+    puts "I have generated a beginner sequence with four elements of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit to quit the game at any time, or (c)heat to see the sequence."
     start_game
   end
 
@@ -28,6 +28,9 @@ class Game
       @guess = gets.chomp.downcase.chars
       if @guess == ['q']
         exit
+      elsif @guess == ['c']
+        puts "You cheater! Here's the sequence #{@random_sequence}"
+
       elsif validate_guess?
         guess_number += 1
         correct_colors
