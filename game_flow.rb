@@ -31,9 +31,13 @@ class Game
         exit
       elsif validate_guess?
         puts "VALID LENGTH!"
+        correct_guess = check_correct_positions?
+        if correct_guess
+          "You've won the game!!!"
+          break
+        end
       else
         #wrong_length_new_guess
-        puts "INVALID LENGTH"
       end
     end
   end
@@ -47,27 +51,27 @@ class Game
     else
       valid_length = true
     end
-    puts "Your guess is #{@guess}"
     return valid_length
   end
 
-  def wrong_length_new_guess
-    until @guess.length == 4 or @guess == ['q']
-      puts "Your guess must be 4 characters long. Please try again. >"
-      @guess = gets.chomp.downcase.chars
-      if @guess == ['q'] then exit end
-    end
-  end
 
-  def check_correct_positions
-    4.each do |index|
+  def check_correct_positions?
+    all_correct = false
+    @current_correct_positions = 0
+    (0..3).each do |index|
       is_true =  @guess.values_at(index) == @random_sequence.values_at(index)
        if is_true == true
          @current_correct_positions += 1
        end
      end
     p "There are #{@current_correct_positions} colors in the correct positions."
+    if @current_correct_positions == 4
+      all_correct = true
     end
+      all_correct
+  end
+
+  
 
 
 
