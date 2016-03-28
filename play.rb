@@ -4,7 +4,6 @@ class Play
   attr_reader :guess
 
   def initialize
-    puts "Yay something works!"
     @guess
     self.class.run
   end

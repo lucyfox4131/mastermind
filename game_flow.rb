@@ -15,7 +15,7 @@ class Game
   def generate_sequence
     new_sequence = Generate.new
     @random_sequence = new_sequence.random_sequence
-    p "This is the #{@random_sequence}"
+    #p "This is the #{@random_sequence}"
     puts "I have generated a beginner sequence with four elements of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit to quit the game at any time, or (c)heat to see the sequence."
     start_game
   end
