@@ -1,3 +1,4 @@
+require 'time'
 require_relative "generate"
 
 class Game
@@ -6,6 +7,7 @@ class Game
     @guess = []
     @random_sequence
     @current_correct_positions
+    @counter_colors
 
     generate_sequence
   end
@@ -19,21 +21,22 @@ class Game
   end
 
   def start_game
-    # if valid_guess?
-    #  var allCorrect = check_positions? && check colors?
-    #  if allCorrect you win
-    #  else continue and guess again
-    # reguess
+    t1 = Time.new
+    guess_number = 0
     loop do
       print "Please enter a guess? >"
       @guess = gets.chomp.downcase.chars
       if @guess == ['q']
         exit
       elsif validate_guess?
-        puts "VALID LENGTH!"
+        guess_number += 1
+        correct_colors
         correct_guess = check_correct_positions?
+        puts "#{@guess} has #{@counter_colors} of the correct elements with #{@current_correct_positions} in the correct positions. You've taken #{guess_number} guess."
         if correct_guess
-          "You've won the game!!!"
+          t2 = Time.new
+          total_time = t2 - t1
+          puts "Congratulations! You guessed the sequence #{@guess} in #{total_time} seconds."
           break
         end
       else
@@ -71,11 +74,36 @@ class Game
       all_correct
   end
 
-  
+  #how many correct colors in guess
 
+  #takes an array of colors and returns hash with colors counted
+  def hash_array_colors(array)
+    array_to_hash = Hash.new(0)
+    #iterate over both arrays
+    array.each do |color|
+      array_to_hash[color] += 1
+    end
+    return array_to_hash
+  end
 
+  def correct_colors
+    sequence_color_hash = hash_array_colors(@random_sequence)
+    guess_color_hash = hash_array_colors(@guess)
+    counter_colors = 0
 
+    guess_color_hash.each_key do |color|
+
+      guess_color_count = guess_color_hash[color]
+      sequence_color_count = sequence_color_hash[color]
+
+      if sequence_color_hash[color]
+        if sequence_color_count < guess_color_count
+          counter_colors += sequence_color_count
+        else
+          counter_colors = counter_colors + guess_color_hash[color]
+        end
+      end
+    end
+    @counter_colors = counter_colors
+  end
 end
-
-
-#{}@guess.chars (should separate a string into an array of characters)
